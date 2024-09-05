@@ -7,12 +7,21 @@ using UnityEngine;
 public class ExcusesScript : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI excuseText; 
-    private string[] excuses = { "Annem çaðýrdý","Kulaðýma sinek kaçtý","Gözüme toz kaçtý","Kapý çaldý","bacaðýma kramp girdi","odaya kuþ girdi"};
-
+    private string[] excuses = { "Annem çaðýrdý", "Kulaðýma sinek kaçtý", "Gözüme toz kaçtý", "Kapý çaldý", "Parmaðýma kramp girdi", "Odaya kuþ girdi", "Týrnaðým kýrýldý (opsiyonel)", "Telefon kastý", "Tuþ basmadý" };
+    int lastExcuseIndex;
+    int excuseIndex;
 
     public void SelectExcuse()
     {
-        excuseText.text = excuses[UnityEngine.Random.Range(0, excuses.Length)];
+        do
+        {
+            excuseIndex = UnityEngine.Random.Range(0, excuses.Length);
+        }
+        while (lastExcuseIndex == excuseIndex);
+
+            excuseText.text = excuses[excuseIndex];
+            lastExcuseIndex = excuseIndex;
+
     }
 
     public void OnEnable()
